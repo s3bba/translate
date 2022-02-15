@@ -1,4 +1,4 @@
-name: "april-fools"
+name: "translate"
 main: "org.op65n.translate.Translate"
 version: "1.0"
 author: "sebba <sebba@op65n.org>"
