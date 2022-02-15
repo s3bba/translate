@@ -1,0 +1,4 @@
+name: "april-fools"
+main: "org.op65n.aprilfools.AprilFools"
+version: "1.0"
+author: "sebba <sebba@op65n.org>"

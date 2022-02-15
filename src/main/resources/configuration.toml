@@ -1,0 +1,12 @@
+subscription-key = "Add your key here"
+location = "Add your location here (azure location not yours, I mean nobody will stop you but then.. why are you still reading this? Get back to work!)"
+
+[messages]
+no-permission = "&cYou don't have permission!"
+global-translations-on = "&aYou activated global translation of chat messages"
+global-translations-off = "&cYou de-activated global translation of chat messages"
+player-translations-on = "&aYou activated translation of chat messages"
+player-translations-off = "&cYou de-activated translation of chat messages"
+translation-chat = "&6Translated &8(&r%display-name%&8)&6: &r%message%"
+translation-command = "&6Translated: &r%message%"
+translation-command-usage = "&a/translate <EN | SI> <message>"
