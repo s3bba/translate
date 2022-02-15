@@ -49,7 +49,7 @@ public class ChatListener implements Listener {
             );
 
             sender.getServer().getInfo().getPlayers().stream()
-                    .filter(player -> TRANSLATION_RECEIVERS.contains(player.getUniqueId()))
+                    .filter(player -> lang == Language.SI || TRANSLATION_RECEIVERS.contains(player.getUniqueId()))
                     .forEach(player -> player.sendMessage(translated));
         }));
     }
