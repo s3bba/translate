@@ -1,2 +1,1 @@
-rootProject.name = "april-fools"
-
+rootProject.name = "translate"

@@ -1,9 +1,9 @@
-package org.op65n.aprilfools.command;
+package org.op65n.translate.command;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
-import org.op65n.aprilfools.configuration.Configuration;
-import org.op65n.aprilfools.configuration.Messages;
+import org.op65n.translate.configuration.Configuration;
+import org.op65n.translate.configuration.Messages;
 
 public class CommandReload extends Command {
 

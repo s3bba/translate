@@ -1,11 +1,11 @@
-package org.op65n.aprilfools.command;
+package org.op65n.translate.command;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
-import org.op65n.aprilfools.configuration.Messages;
-import org.op65n.aprilfools.listener.ChatListener;
+import org.op65n.translate.configuration.Messages;
+import org.op65n.translate.listener.ChatListener;
 
 public class CommandTranslateToggle extends Command {
 

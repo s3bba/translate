@@ -1,4 +1,4 @@
-package org.op65n.aprilfools.listener;
+package org.op65n.translate.listener;
 
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -9,10 +9,10 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.scheduler.TaskScheduler;
 import net.md_5.bungee.event.EventHandler;
 import org.jetbrains.annotations.NotNull;
-import org.op65n.aprilfools.AprilFools;
-import org.op65n.aprilfools.configuration.Messages;
-import org.op65n.aprilfools.model.Language;
-import org.op65n.aprilfools.model.Translator;
+import org.op65n.translate.Translate;
+import org.op65n.translate.configuration.Messages;
+import org.op65n.translate.model.Language;
+import org.op65n.translate.model.Translator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +23,7 @@ public class ChatListener implements Listener {
     private static final Set<UUID> TRANSLATION_RECEIVERS = new HashSet<>();
     private static boolean translateMessages = true;
 
-    private final Plugin plugin = AprilFools.self();
+    private final Plugin plugin = Translate.self();
     private final ProxyServer proxy = plugin.getProxy();
     private final TaskScheduler scheduler = proxy.getScheduler();
     private final Translator translator;

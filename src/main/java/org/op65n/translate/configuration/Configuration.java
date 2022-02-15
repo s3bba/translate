@@ -1,7 +1,7 @@
-package org.op65n.aprilfools.configuration;
+package org.op65n.translate.configuration;
 
 import org.jetbrains.annotations.NotNull;
-import org.op65n.aprilfools.AprilFools;
+import org.op65n.translate.Translate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tomlj.Toml;
@@ -41,7 +41,7 @@ public class Configuration {
 
     private static Optional<InputStream> getResource(@NotNull String filename) {
         try {
-            URL url = AprilFools.class.getClassLoader().getResource(filename);
+            URL url = Translate.class.getClassLoader().getResource(filename);
 
             if (url == null) return Optional.empty();
 
@@ -61,7 +61,7 @@ public class Configuration {
 
         if (optional.isEmpty()) throw new RuntimeException(String.format("Resource %s cannot be found", resourcePath));
 
-        final File dataFolder = AprilFools.self().getDataFolder();
+        final File dataFolder = Translate.self().getDataFolder();
         final File outFile = new File(dataFolder, resourcePath);
 
         if (outFile.exists()) return;
@@ -93,7 +93,7 @@ public class Configuration {
         Configuration.copyResource(CONFIGURATION);
 
         try {
-            final Path path = Path.of(AprilFools.self().getDataFolder().getAbsolutePath(), CONFIGURATION);
+            final Path path = Path.of(Translate.self().getDataFolder().getAbsolutePath(), CONFIGURATION);
             final TomlParseResult result = Toml.parse(path);
             result.errors().forEach(error -> log.error(error.toString()));
 

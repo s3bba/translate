@@ -1,4 +1,4 @@
-package org.op65n.aprilfools.model;
+package org.op65n.translate.model;
 
 import org.jetbrains.annotations.NotNull;
 

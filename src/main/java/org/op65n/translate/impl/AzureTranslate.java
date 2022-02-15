@@ -1,11 +1,11 @@
-package org.op65n.aprilfools.impl;
+package org.op65n.translate.impl;
 
 import com.google.gson.*;
 import com.squareup.okhttp.*;
 import org.jetbrains.annotations.NotNull;
-import org.op65n.aprilfools.configuration.Configuration;
-import org.op65n.aprilfools.model.Language;
-import org.op65n.aprilfools.model.Translator;
+import org.op65n.translate.configuration.Configuration;
+import org.op65n.translate.model.Language;
+import org.op65n.translate.model.Translator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tomlj.TomlParseResult;

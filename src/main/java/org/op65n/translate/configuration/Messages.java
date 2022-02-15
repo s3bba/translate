@@ -1,10 +1,9 @@
-package org.op65n.aprilfools.configuration;
+package org.op65n.translate.configuration;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.tomlj.TomlParseResult;
 import org.tomlj.TomlTable;
 

@@ -1,4 +1,4 @@
-package org.op65n.aprilfools.command;
+package org.op65n.translate.command;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -7,10 +7,10 @@ import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.scheduler.TaskScheduler;
 import org.jetbrains.annotations.NotNull;
-import org.op65n.aprilfools.AprilFools;
-import org.op65n.aprilfools.configuration.Messages;
-import org.op65n.aprilfools.model.Language;
-import org.op65n.aprilfools.model.Translator;
+import org.op65n.translate.Translate;
+import org.op65n.translate.configuration.Messages;
+import org.op65n.translate.model.Language;
+import org.op65n.translate.model.Translator;
 
 import java.util.Arrays;
 
@@ -18,7 +18,7 @@ public class CommandTranslate extends Command {
 
     private static final String COMMAND = "translate";
     private static final String PERMISSION = "translate.translate";
-    private final Plugin plugin = AprilFools.self();
+    private final Plugin plugin = Translate.self();
     private final ProxyServer proxy = plugin.getProxy();
     private final TaskScheduler scheduler = proxy.getScheduler();
     private final Translator translator;
