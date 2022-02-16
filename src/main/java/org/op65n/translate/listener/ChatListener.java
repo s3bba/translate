@@ -41,15 +41,43 @@ public class ChatListener implements Listener {
         if (event.isProxyCommand()) return;
 
         final ProxiedPlayer sender = (ProxiedPlayer) event.getSender();
-        final Language lang = TRANSLATION_RECEIVERS.contains(sender.getUniqueId()) ? Language.SI : Language.ENG;
 
-        scheduler.runAsync(plugin, () -> translator.translate(lang, event.getMessage()).ifPresent(translatedString -> {
+        // foreign players
+        if (TRANSLATION_RECEIVERS.contains(sender.getUniqueId())) {
+            final String originalMessage = event.getMessage();
+            event.setCancelled(true);
+
+            scheduler.runAsync(plugin, () -> translator.translate(Language.SI, originalMessage).ifPresent(translatedString -> {
+                final UUID uuid = sender.getUniqueId();
+                final BaseComponent[] translated = Messages.TRANSLATION_CHAT.asComponents(placeholders ->
+                        placeholders.map("name", sender.getName()).map("display-name", sender.getDisplayName()).map("message", translatedString)
+                );
+
+                sender.getServer().getInfo().getPlayers()
+                        .forEach(player -> {
+                            // sender
+                            if (player.getUniqueId().equals(uuid)) {
+                                final BaseComponent[] senderMessage = Messages.TRANSLATION_CHAT_SENDER.asComponents(placeholders -> placeholders.map("message", originalMessage));
+                                player.sendMessage(senderMessage);
+                                return;
+                            }
+
+                            // all other players
+                            player.sendMessage(uuid, translated);
+                        });
+            }));
+
+            return;
+        }
+
+        // local players
+        scheduler.runAsync(plugin, () -> translator.translate(Language.ENG, event.getMessage()).ifPresent(translatedString -> {
             final BaseComponent[] translated = Messages.TRANSLATION_CHAT.asComponents(placeholders ->
                     placeholders.map("name", sender.getName()).map("display-name", sender.getDisplayName()).map("message", translatedString)
             );
 
             sender.getServer().getInfo().getPlayers().stream()
-                    .filter(player -> lang == Language.SI || TRANSLATION_RECEIVERS.contains(player.getUniqueId()))
+                    .filter(player -> TRANSLATION_RECEIVERS.contains(player.getUniqueId()))
                     .forEach(player -> player.sendMessage(translated));
         }));
     }
