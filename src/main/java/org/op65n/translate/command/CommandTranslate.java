@@ -3,6 +3,7 @@ package org.op65n.translate.command;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.scheduler.TaskScheduler;
@@ -53,8 +54,11 @@ public class CommandTranslate extends Command {
             final String original = String.join(" ", Arrays.copyOfRange(args, copyFrom, args.length));
 
             translator.translate(lang, original).ifPresent(translated -> {
-                final BaseComponent[] message = Messages.TRANSLATION_COMMAND.asComponents(placeholder -> placeholder.map("message" , translated));
-                sender.sendMessage(message);
+                final ProxiedPlayer player = (ProxiedPlayer) sender;
+                final BaseComponent[] senderMessage = Messages.TRANSLATION_CHAT_SENDER.asComponents(placeholders -> placeholders.map("message", original));
+
+                player.sendMessage(senderMessage);
+                player.chat(translated);
             });
         });
     }

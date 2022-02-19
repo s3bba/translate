@@ -47,23 +47,10 @@ public class ChatListener implements Listener {
             event.setCancelled(true);
 
             scheduler.runAsync(plugin, () -> translator.translate(Language.SI, originalMessage).ifPresent(translatedString -> {
-                final UUID uuid = sender.getUniqueId();
-                final BaseComponent[] translated = Messages.TRANSLATION_CHAT.asComponents(placeholders ->
-                        placeholders.map("name", sender.getName()).map("display-name", sender.getDisplayName()).map("message", translatedString)
-                );
+                final BaseComponent[] senderMessage = Messages.TRANSLATION_CHAT_SENDER.asComponents(placeholders -> placeholders.map("message", originalMessage));
 
-                sender.getServer().getInfo().getPlayers()
-                        .forEach(player -> {
-                            // sender
-                            if (player.getUniqueId().equals(uuid)) {
-                                final BaseComponent[] senderMessage = Messages.TRANSLATION_CHAT_SENDER.asComponents(placeholders -> placeholders.map("message", originalMessage));
-                                player.sendMessage(senderMessage);
-                                return;
-                            }
-
-                            // all other players
-                            player.sendMessage(uuid, translated);
-                        });
+                sender.sendMessage(senderMessage);
+                sender.chat(translatedString);
             }));
 
             return;
