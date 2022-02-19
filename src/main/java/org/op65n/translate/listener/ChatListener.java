@@ -38,7 +38,6 @@ public class ChatListener implements Listener {
         if (!translateMessages) return;
         if (TRANSLATION_RECEIVERS.size() == 0) return;
         if (event.isCommand()) return;
-        if (event.isProxyCommand()) return;
 
         final ProxiedPlayer sender = (ProxiedPlayer) event.getSender();
 

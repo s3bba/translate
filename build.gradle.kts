@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     implementation("com.squareup.okhttp:okhttp:2.7.5")
-    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("com.google.code.gson:gson:2.9.0")
     implementation("org.jetbrains:annotations:23.0.0")
     implementation("org.tomlj:tomlj:1.0.0")
 
@@ -39,7 +39,7 @@ tasks {
         archiveClassifier.set("")
         archiveVersion.set(project.version as String)
 
-        val destination = "org.op65n.aprilfools.libs"
+        val destination = "org.op65n.translate.libs"
 
         relocate("org.jetbrains", "$destination.jetbrains")
         relocate("com.google.code.gson", "$destination.gson")
