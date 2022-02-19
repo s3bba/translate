@@ -32,6 +32,28 @@ public class ChatListener implements Listener {
         this.translator = translator;
     }
 
+    public static @NotNull BaseComponent[] togglePlayer(final @NotNull ProxiedPlayer player) {
+        final UUID uuid = player.getUniqueId();
+
+        if (TRANSLATION_RECEIVERS.contains(uuid)) {
+            TRANSLATION_RECEIVERS.remove(uuid);
+            return Messages.PLAYER_TRANSLATIONS_OFF.asComponents();
+        }
+
+        TRANSLATION_RECEIVERS.add(uuid);
+        return Messages.PLAYER_TRANSLATIONS_ON.asComponents();
+    }
+
+    public static @NotNull BaseComponent[] toggleGlobal() {
+        if (translateMessages) {
+            translateMessages = false;
+            return Messages.GLOBAL_TRANSLATIONS_OFF.asComponents();
+        }
+
+        translateMessages = true;
+        return Messages.GLOBAL_TRANSLATIONS_ON.asComponents();
+    }
+
     @SuppressWarnings("unused")
     @EventHandler
     public void onChatEvent(final @NotNull ChatEvent event) {
@@ -66,28 +88,6 @@ public class ChatListener implements Listener {
                     .filter(player -> TRANSLATION_RECEIVERS.contains(player.getUniqueId()))
                     .forEach(player -> player.sendMessage(translated));
         }));
-    }
-
-    public static @NotNull BaseComponent[] togglePlayer(final @NotNull ProxiedPlayer player) {
-        final UUID uuid = player.getUniqueId();
-
-        if (TRANSLATION_RECEIVERS.contains(uuid)) {
-            TRANSLATION_RECEIVERS.remove(uuid);
-            return Messages.PLAYER_TRANSLATIONS_OFF.asComponents();
-        }
-
-        TRANSLATION_RECEIVERS.add(uuid);
-        return Messages.PLAYER_TRANSLATIONS_ON.asComponents();
-    }
-
-    public static @NotNull BaseComponent[] toggleGlobal() {
-        if (translateMessages) {
-            translateMessages = false;
-            return Messages.GLOBAL_TRANSLATIONS_OFF.asComponents();
-        }
-
-        translateMessages = true;
-        return Messages.GLOBAL_TRANSLATIONS_ON.asComponents();
     }
 
 }
