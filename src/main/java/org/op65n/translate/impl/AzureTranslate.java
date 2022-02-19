@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tomlj.TomlParseResult;
 
+import java.text.MessageFormat;
 import java.util.*;
 
 public class AzureTranslate implements Translator {
@@ -58,7 +59,8 @@ public class AzureTranslate implements Translator {
 
     @Override
     public @NotNull Optional<String> translate(final @NotNull Language language, final @NotNull String text) {
-        final String payload = "[{\"Text\": \"" + text + "\"}]";
+        final String sanitizedText = text.replaceAll("\"", "").replaceAll("\\\\", "");
+        final String payload = MessageFormat.format("['{'\"Text\": \"{0}\"'}']", sanitizedText);
 
         final Optional<HttpUrl> optional = endpoints.entrySet().stream()
                 .filter(entry -> entry.getKey() == language)
@@ -107,6 +109,9 @@ public class AzureTranslate implements Translator {
         } catch (final @NotNull Exception ex) {
             ex.printStackTrace();
             log.error("Could not resolve response: {}", responseBody);
+            log.error("This error was caused by message: {}", text);
+            log.error("Sent payload: {}", payload);
+
             return Optional.empty();
         }
     }
