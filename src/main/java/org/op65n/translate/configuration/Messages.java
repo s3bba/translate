@@ -23,7 +23,7 @@ public enum Messages {
     PLAYER_TRANSLATIONS_ON("player-translations-on", "&aYou activated translation of chat messages"),
     PLAYER_TRANSLATIONS_OFF("player-translations-off", "&cYou de-activated translation of chat messages"),
     TRANSLATION_CHAT("translation-chat", "&6Translated &8(&r%display-name%&8)&6: &r%message%"),
-    TRANSLATION_CHAT_SENDER("translation-chat-sender", "&bYou: &r%message%"),
+    TRANSLATION_CHAT_SENDER("translation-chat-sender", "&6You: &r%message%"),
     TRANSLATION_COMMAND("translation-command", "&6Translated: &r%message%"),
     TRANSLATION_COMMAND_USAGE("translation-command-usage", "&a/translate <EN | SI> <message>"),
     RELOADED("configuration-reloaded", "Configuration cache reloaded, successfully: %success%");
@@ -62,12 +62,11 @@ public enum Messages {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
-    public @NotNull BaseComponent[] asComponents() {
-        final String formattedMessage = this.applyColors(message);
-        return new ComponentBuilder(formattedMessage).create();
+    public @NotNull String asRawString() {
+        return message;
     }
 
-    public @NotNull BaseComponent[] asComponents(final @NotNull Consumer<Placeholder> consumer) {
+    public @NotNull String asRawString(final @NotNull Consumer<Placeholder> consumer) {
         String formattedMessage = message;
 
         Placeholder placeholder = new Placeholder();
@@ -78,9 +77,23 @@ public enum Messages {
             formattedMessage = formattedMessage.replaceAll(formattedPlaceholder, entry.getValue());
         }
 
-        formattedMessage = this.applyColors(formattedMessage);
+        return formattedMessage;
+    }
 
-        return new ComponentBuilder(formattedMessage).create();
+    public @NotNull String asString() {
+        return this.applyColors(this.asRawString());
+    }
+
+    public @NotNull String asString(final @NotNull Consumer<Placeholder> consumer) {
+        return this.applyColors(this.asRawString(consumer));
+    }
+
+    public @NotNull BaseComponent[] asComponents() {
+        return new ComponentBuilder(this.asString()).create();
+    }
+
+    public @NotNull BaseComponent[] asComponents(final @NotNull Consumer<Placeholder> consumer) {
+        return new ComponentBuilder(this.asString(consumer)).create();
     }
 
     public static class Placeholder {
